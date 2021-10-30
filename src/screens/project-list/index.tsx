@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import qs from 'qs'
 import { SearchPanel } from './search-panel'
 import { List } from './list'
-import {cleanObject, useDebounce, useMount} from "../../utils";
+import {cleanObject, useDebounce, useMount} from "../../utils/index";
 
 
 const apiUrl = process.env.REACT_APP_API_URL
@@ -12,11 +12,11 @@ export const ProjectListScreen = () => {
 		name: '',
 		personId: ''
 	})
-	const debouncedParam = useDebounce(param, 2000)
-	
+	const debouncedParam = useDebounce(param, 200)
+
 	const [users, setUsers] = useState([])
 	const [list, setList] = useState([])
-	
+
 	useEffect(() => {
 		fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`).then(async res => {
 			if (res.ok) {
@@ -24,7 +24,7 @@ export const ProjectListScreen = () => {
 			}
 		})
 	}, [debouncedParam])
-	
+
 	useMount(() => {
 		fetch(`${apiUrl}/users`).then(async res => {
 			if(res.ok) {
@@ -32,9 +32,11 @@ export const ProjectListScreen = () => {
 			}
 		})
 	})
-	
-	return <div>
-		<SearchPanel users={users} param={param} setParam={setParam} />
-		<List users={users} list={list}/>
-	</div>
+
+	return (
+        <div>
+            <SearchPanel users={users} param={param} setParam={setParam} />
+            <List users={users} list={list}/>
+        </div>
+	)
 }
