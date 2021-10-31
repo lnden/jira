@@ -22,7 +22,7 @@ export const useMount = (callback: () => void) => {
 	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 }
 
-export const useDebounce = (value: unknown, delay?: number): any => {
+export const useDebounce = <T>(value: T, delay?: number) => {
 	const [debouncedValue, setDebouncedValue] = useState(value)
 
 	useEffect(() => {
