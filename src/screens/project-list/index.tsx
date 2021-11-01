@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import qs from 'qs'
-import { SearchPanel } from './search-panel'
+import { SearchPanels } from './search-panel'
 import { List } from './list'
-import {cleanObject, useDebounce, useMount} from "../../utils/index";
+import { cleanObject, useDebounce, useMount } from "../../utils/index";
 
 
 const apiUrl = process.env.REACT_APP_API_URL
@@ -27,16 +27,16 @@ export const ProjectListScreen = () => {
 
 	useMount(() => {
 		fetch(`${apiUrl}/users`).then(async res => {
-			if(res.ok) {
+			if (res.ok) {
 				setUsers(await res.json())
 			}
 		})
 	})
 
 	return (
-        <div>
-            <SearchPanel users={users} param={param} setParam={setParam} />
-            <List users={users} list={list}/>
-        </div>
+		<div>
+			<SearchPanels users={users} param={param} setParam={setParam} />
+			<List users={users} list={list} />
+		</div>
 	)
 }

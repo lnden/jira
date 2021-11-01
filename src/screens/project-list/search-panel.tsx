@@ -4,25 +4,26 @@ export interface User {
     email: string;
     title: string;
     organization: string
+    token: string
 }
 
 interface SearchPanel {
-	users: User[];
-	param: {
-		name: string,
-		personId: string
-	};
-	setParam: (param: SearchPanel['param']) => void
+    users: User[];
+    param: {
+        name: string,
+        personId: string
+    };
+    setParam: (param: SearchPanel['param']) => void
 }
 
-export const SearchPanel = ({users, param, setParam}: SearchPanel) => {
-	return (
+export const SearchPanels = ({ users, param, setParam }: SearchPanel) => {
+    return (
         <form>
             <div>
                 <input type="text" value={param.name} onChange={event => setParam({
                     ...param,
                     name: event.target.value
-                })}/>
+                })} />
                 <select value={param.personId} onChange={event => setParam({
                     ...param,
                     personId: event.target.value
@@ -34,5 +35,5 @@ export const SearchPanel = ({users, param, setParam}: SearchPanel) => {
                 </select>
             </div>
         </form>
-	)
+    )
 }
